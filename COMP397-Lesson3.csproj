@@ -60,12 +60,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\images\BackButton.png" />
+    <Content Include="Assets\images\butterfly.jpg" />
+    <Content Include="Assets\images\dragon-cave.jpg" />
     <Content Include="Assets\images\dragon-cover.jpg" />
-    <Content Include="Assets\images\LeftCave.png" />
-    <Content Include="Assets\images\NextButton.png" />
-    <Content Include="Assets\images\RightCave.png" />
+    <Content Include="Assets\images\dragon-dogma.jpg" />
+    <Content Include="Assets\images\dragon-fight.jpg" />
+    <Content Include="Assets\images\dragon-fire.jpg" />
+    <Content Include="Assets\images\dragon-forest.png" />
+    <Content Include="Assets\images\dragon-logo.png" />
+    <Content Include="Assets\images\dragon-palace.jpg" />
+    <Content Include="Assets\images\dragon-rider.jpg" />
+    <Content Include="Assets\images\dragon-sea.jpg" />
+    <Content Include="Assets\images\dragon-treasure.jpg" />
+    <Content Include="Assets\images\Dragon_Riding.png" />
+    <Content Include="Assets\images\forest-temple.jpg" />
+    <Content Include="Assets\images\LeftCaveButton.png" />
+    <Content Include="Assets\images\sleeping_forest_dragon.jpg" />
+    <Content Include="Assets\images\startoverButton.png" />
+    <Content Include="Assets\images\RightCaveButton.png" />
     <Content Include="Assets\images\StartButton.png" />
-    <Content Include="index -Started.html" />
+    <Content Include="butterfly.html" />
+    <Content Include="index -GettingStart.html" />
     <Content Include="packages.config" />
     <Content Include="Assets\audio\meow.ogg" />
     <Content Include="Assets\audio\bell.ogg" />
@@ -104,6 +119,7 @@
     <TypeScriptCompile Include="Scripts\objects\button.ts" />
     <TypeScriptCompile Include="Scripts\objects\image.ts" />
     <TypeScriptCompile Include="Scripts\objects\label.ts" />
+    <TypeScriptCompile Include="Scripts\states\gameover.ts" />
     <TypeScriptCompile Include="Scripts\states\menu.ts" />
     <TypeScriptCompile Include="Scripts\states\scenario.ts" />
     <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />

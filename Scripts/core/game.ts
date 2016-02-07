@@ -1,6 +1,4 @@
-﻿/// <reference path="../config/config.ts" />
-
-/// <reference path="../typings/jquery/jquery.d.ts" />
+﻿/// <reference path="../typings/jquery/jquery.d.ts" />
 /// <reference path="../typings/stats/stats.d.ts" />
 /// <reference path="../typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="../typings/easeljs/easeljs.d.ts" />
@@ -8,6 +6,7 @@
 /// <reference path="../typings/soundjs/soundjs.d.ts" />
 /// <reference path="../typings/preloadjs/preloadjs.d.ts" />
 
+/// <reference path="../config/config.ts" />
 /// <reference path="../objects/label.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/image.ts" />
@@ -19,38 +18,33 @@ var canvas: HTMLElement;
 var stage: createjs.Stage;
 var stats: Stats;
 var state: number;
+var scenarioNum: number;
 var scene: createjs.Container;
 var stateFunction: any; // alias for our current state
 
 // Game Variables
-var helloLabel: objects.Label;
+//var helloLabel: objects.Label;
 var gameNameLabel: objects.Label;
 var game_face: objects.Label;
-var game_entrance: objects.Label;
-var game_cave1: objects.Label;
-var game_cave2: objects.Label;
-var game_cave3: objects.Label;
-var game_cave4: objects.Label;
-var game_cave5: objects.Label;
-var game_cave6: objects.Label;
-var game_cave7: objects.Label;
-var game_cave8: objects.Label;
-var game_cave9: objects.Label;
-var game_cave10: objects.Label;
-var game_cave11: objects.Label;
-var game_cave12: objects.Label;
-var game_cave13: objects.Label;
-var game_cave14: objects.Label;
-
 
 var startButton: objects.Button;
 var leftButton: objects.Button;
+var backButton: objects.Button;
 var rightButton: objects.Button;
+var startoverButton: objects.Button;
+var bitmap: createjs.Bitmap;
 
 function init(): void {
 
     canvas = document.getElementById("canvas"); // reference to canvas element
     stage = new createjs.Stage(canvas); // passing canvas to stage
+    bitmap = new createjs.Bitmap("Assets/images/dragon-cover.jpg");
+    bitmap.scaleX = 0.4;
+    bitmap.scaleY = 0.35; 
+    //bitmap.x = 0;
+    //bitmap.y = 0;
+    //bitmap.setBounds(0, 0, 640, 480);
+    stage.addChild(bitmap);
     stage.enableMouseOver(20); // enable mouse events
     console.log("set up stage...");
 
@@ -59,8 +53,9 @@ function init(): void {
     console.log("set up Ticker...");
 
     setupStats(); // sets up our stats counting
-    state = config.PLAY_STATE;
+    state = config.MENU_STATE;
     changeState();
+    
     
 }
 
@@ -85,21 +80,99 @@ function setupStats(): void {
 
 // Callback function / Event Handler for Start Button Click
 function clickStartButton(event: createjs.MouseEvent): void {
-    //game_face.text = game_entrance.text;
-    //game_face.font = "20px Arial";
-    //game_face.color = "#ff7700";
-
+ 
+    scene.removeChild(startButton);
+    scene.removeChild(game_face);
     state = config.PLAY_STATE;
+    scenarioNum = 0;
     changeState();
+   
     
 }
 
 function clickLeftButton(event: createjs.MouseEvent): void {
 
+    if (scenarioNum == 0) {
+        scenarioNum = 1;
+    } else if (scenarioNum == 1) {
+        scenarioNum = 3;
+    } else if (scenarioNum == 2) {
+        scenarioNum = 5;
+    } else if (scenarioNum == 3) {
+        scenarioNum = 7;
+    } else if (scenarioNum == 4) {
+        scenarioNum = 9;
+    } else if (scenarioNum == 5) {
+        scenarioNum = 11;
+    } else if (scenarioNum == 6) {
+        scenarioNum = 13;
+    }
+
+    if (scenarioNum == 9) {//win the game
+        state = config.OVER_STATE;
+    }
+    changeState();
 }
 
-function clickRightButton(event: createjs.MouseEvent): void {
+function clickBackButton(event: createjs.MouseEvent): void {
+    if (scenarioNum == 1 || scenarioNum == 2) {
+        scenarioNum = 0;
+    } else if (scenarioNum == 3 || scenarioNum == 4) {
+        scenarioNum = 1;
+    } else if (scenarioNum == 5 || scenarioNum == 6) {
+        scenarioNum = 2;
+    } else if (scenarioNum == 7 || scenarioNum == 8) {
+        scenarioNum = 3;
+    } else if (scenarioNum == 9 || scenarioNum == 10) {
+        scenarioNum = 4;
+    } else if (scenarioNum == 11 || scenarioNum == 12) {
+        scenarioNum = 5;
+    } else if (scenarioNum == 13 || scenarioNum == 14) {
+        scenarioNum = 6;
+    }
+    changeState();
+}
 
+
+function clickRightButton(event: createjs.MouseEvent): void {
+    if (scenarioNum == 0) {
+        scenarioNum = 2;
+    } else if (scenarioNum == 1) {
+        scenarioNum = 4;
+    } else if (scenarioNum == 2) {
+        scenarioNum = 6;
+    } else if (scenarioNum == 3) {
+        scenarioNum = 8;
+    } else if (scenarioNum == 4) {
+        scenarioNum = 10;
+    } else if (scenarioNum == 5) {
+        scenarioNum = 12;
+    } else if (scenarioNum == 6) {
+        scenarioNum = 14;
+    }
+
+    if (scenarioNum == 14) {//lose the game
+        state = config.OVER_STATE;
+    }
+    changeState();
+}
+
+function clickStartOverButton(event: createjs.MouseEvent): void { //start over the game
+
+    stage.removeChild(bitmap);
+    bitmap = new createjs.Bitmap("Assets/images/dragon-cover.jpg");
+    bitmap.scaleX = 0.4;
+    bitmap.scaleY = 0.35;
+    stage.addChild(bitmap);
+    stage.update();
+
+    scene.removeChild(gameNameLabel);
+    scene.removeChild(game_face);
+    scene.removeChild(startoverButton);
+    state = config.MENU_STATE;
+    changeState();
+
+    
 }
 
 // state machine prep
@@ -114,14 +187,15 @@ function changeState(): void {
             break;
         case config.PLAY_STATE:
             // show the play scene
-            console.log("Go to play state...");
+            console.log("Go to play game scenario...");
             stateFunction = states.scenario;
             break;
         case config.OVER_STATE:
             // show the game over scene
+            console.log("Game over state...");
+            stateFunction = states.gameover;
             break;
     }
-
     stateFunction();
 }
  

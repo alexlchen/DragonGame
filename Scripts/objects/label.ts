@@ -6,7 +6,7 @@
             super(labelString, labelFont, labelColour);
 
             //regX- the left offset for this display object's registration point
-            this.regX = this.getBounds().width * 0.5;  //return a rectangle representing this object's boundsin its local coordinate system
+            this.regX = this.getBounds().width * 0.5;  //return a rectangle representing this object's bounds in its local coordinate system
             //regY- the y offset for this display object's registration point
             this.regY = this.getBounds().height * 0.5; //0.5
 

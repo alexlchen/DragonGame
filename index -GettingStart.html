@@ -6,19 +6,12 @@
     
     <title>CreateJS Getting Started</title>
 </head>
-<body onload="init();">
-    <script>
-        function init() {
-            initEaseljs();
-            initTweenjs();
-        }
-    </script>
+<body onload="init();">   
     <div>
-        
+        <canvas id="demoCanvas" width="500" height="300"></canvas><br/>
         <button onclick="playSound();" class="playSound">Play Sound</button>
         <button onclick="stopSound();" class="playSound">Stop Sound</button>
-        <button onclick="loadImage();" class="load-image">Load Image</button>
-        <canvas id="demoCanvas" width="500" height="300"></canvas>
+        <button onclick="loadImage();" class="load-image">Load Image</button> 
     </div>
 
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
@@ -26,12 +19,20 @@
     <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
     <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
 
-    
+    <script>
+        function init() {
+            initEaseljs();
+            initTweenjs();
+        }
+    </script>
+
     <script>
         var stage, circle; //global variable
 
         function initEaseljs() {
             stage = new createjs.Stage("demoCanvas");
+            var bitmap = new createjs.Bitmap("Assets/images/dragon-cover.jpg");
+            stage.addChild(bitmap);
             circle = new createjs.Shape();
             circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
             circle.x = 100;
@@ -93,9 +94,9 @@
         function loadImage() {
             var queue = new createjs.LoadQueue(true);
             queue.addEventListener("fileload", handleFileComplete);
-            queue.loadFile("assets/images/StartButton.png");
-            queue.loadFile("assets/images/NextButton.png");
-            queue.loadFile("assets/images/BackButton.png");
+            queue.loadFile("Assets/images/dragon-cover.jpg");
+            //queue.loadFile("assets/images/NextButton.png");
+            //queue.loadFile("assets/images/BackButton.png");
         }
 
         function handleFileComplete(event) {

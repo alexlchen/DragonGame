@@ -6,10 +6,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 var objects;
 (function (objects) {
     // LABEL CLASS 
-    var GameImage = (function (_super) {
-        __extends(GameImage, _super);
+    var Bitmap = (function (_super) {
+        __extends(Bitmap, _super);
         // CONSTRUCTOR METHOD
-        function GameImage(imageName, imageUri, x, y) {
+        function Bitmap(imageUri, x, y) {
             _super.call(this, imageUri);
             //regX- the left offset for this display object's registration point
             this.regX = this.getBounds().width * 1; //return a rectangle representing this object's boundsin its local coordinate system
@@ -18,8 +18,8 @@ var objects;
             this.x = x;
             this.y = y;
         }
-        return GameImage;
+        return Bitmap;
     })(createjs.Bitmap);
-    objects.GameImage = GameImage;
+    objects.Bitmap = Bitmap;
 })(objects || (objects = {}));
 //# sourceMappingURL=image.js.map

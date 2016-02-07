@@ -29,7 +29,5 @@
         outButton(event: createjs.MouseEvent): void {
             event.currentTarget.alpha = 1.0;
         }
-
-
     }
 } 
